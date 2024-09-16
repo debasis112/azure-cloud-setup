@@ -42,3 +42,8 @@ variable "ad_admin_obj_id" {
   type    = string
   default = ""
 }
+
+variable "mssqldatabase_name" {
+  type    = string
+  default = "debasis-project-mssql-db-01"
+}
