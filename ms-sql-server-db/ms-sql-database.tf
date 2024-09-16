@@ -12,7 +12,7 @@ resource "azurerm_mssql_database" "sql-database-01" {
     prevent_destroy = true
   }
 }
-// Database firewall rule
+// Database firewall rule-01
 resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
   name             = "personal-asset-01"
   server_id        = azurerm_mssql_server.sql-server-01.id
