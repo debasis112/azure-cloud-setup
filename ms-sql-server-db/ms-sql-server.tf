@@ -9,12 +9,8 @@ resource "azurerm_mssql_server" "sql-server-01" {
   minimum_tls_version          = "1.2"
 
   azuread_administrator {
-    login_username = [
-      "2020WA86256@wilp.bits-pilani.ac.in" // Debasis Panda
-    ]
-    object_id      = [
-      "48f92a51-e575-4da0-94cc-4a1dd5182901" // Debasis Panda
-    ]
+    login_username = var.ad_admin_name
+    object_id      = var.ad_admin_obj_id
   }
 
   tags = local.common_tags

@@ -29,11 +29,11 @@ variable "mssqlserver_admin_pass" {
 }
 
 variable "ad_admin_name" {
-  type    = list(string)
-  default = [] // Add , and other username from console for access
+  type    = string
+  default = ""
 }
 
 variable "ad_admin_obj_id" {
-  type    = list(string)
-  default = [] // Add , and other object ID from console for access
+  type    = string
+  default = ""
 }
