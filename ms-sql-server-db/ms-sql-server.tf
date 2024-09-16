@@ -1,8 +1,8 @@
 # # Create a ms sql server
 resource "azurerm_mssql_server" "sql-server-01" {
-  name                         = "debasis-project-mssqlserver-01"
+  name                         = var.mssqlserver_name
   resource_group_name          = data.azurerm_resource_group.rsg-01.name
-  location                     = "Central India"
+  location                     = data.azurerm_resource_group.rsg-01.location
   version                      = "12.0"
   administrator_login          = var.mssqlserver_admin_name
   administrator_login_password = var.mssqlserver_admin_pass
