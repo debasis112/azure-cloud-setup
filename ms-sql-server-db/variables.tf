@@ -18,6 +18,11 @@ variable "tenant_id" {
   default = ""
 }
 
+variable "mssqlserver_name" {
+  type    = string
+  default = "debasis-project-mssqlserver-01"
+}
+
 variable "mssqlserver_admin_name" {
   type    = string
   default = ""
