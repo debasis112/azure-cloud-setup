@@ -1,7 +1,3 @@
-output "rsg-01-id" {
-  value = data.azurerm_resource_group.rsg-01.id
-}
-
 output "rsg-01-location" {
   value = data.azurerm_resource_group.rsg-01.location
 }
