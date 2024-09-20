@@ -15,3 +15,4 @@ resource "azurerm_mssql_server" "sql-server-01" {
 
   tags = local.common_tags
 }
+//
