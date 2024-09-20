@@ -12,7 +12,6 @@ resource "azurerm_mssql_server" "sql-server-01" {
     login_username = var.ad_admin_name
     object_id      = var.ad_admin_obj_id
   }
-
   tags = local.common_tags
 }
-//
+
