@@ -69,6 +69,6 @@ resource "azuread_service_principal" "acr_sp-01" {
 
 resource "azuread_service_principal_password" "acr_sp_password-01" {
   service_principal_id = azuread_service_principal.acr_sp-01.id
-  value                = var.client_secret  # Store securely or use terraform variables/secrets
+  # value                = var.client_secret  # Store securely or use terraform variables/secrets
   end_date             = "2099-12-31T23:59:59Z"
 }
