@@ -54,7 +54,7 @@ resource "azurerm_resource_group" "rsg-01" {
 ////////////////////////////////////////////
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "myacrregistry"
+  name                     = "debacrregistry"
   resource_group_name      = azurerm_resource_group.rsg-01.name
   location                 = azurerm_resource_group.rsg-01.location
   sku                      = "Basic"
