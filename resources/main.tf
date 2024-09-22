@@ -61,3 +61,14 @@ resource "azurerm_container_registry" "acr" {
   admin_enabled            = true  # You can also disable this and use service principals for more security.
   tags     = local.common_tags
 }
+
+// SPN for acr
+resource "azuread_service_principal" "acr_sp-01" {
+  client_id = azurerm_container_registry.acr.id
+}
+
+resource "azuread_service_principal_password" "acr_sp_password-01" {
+  service_principal_id = azuread_service_principal.acr_sp-01.id
+  value                = var.client_secret  # Store securely or use terraform variables/secrets
+  end_date             = "2099-12-31T23:59:59Z"
+}
