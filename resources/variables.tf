@@ -18,9 +18,19 @@ variable "tenant_id" {
   default = ""
 }
 
+variable "rg_name" {
+  type    = string
+  default = ""
+}
+
+variable "location" {
+  type    = string
+  default = ""
+}
+
 variable "mssqlserver_name" {
   type    = string
-  default = "debasis-project-mssqlserver-01"
+  default = ""
 }
 
 variable "mssqlserver_admin_name" {
@@ -45,5 +55,5 @@ variable "ad_admin_obj_id" {
 
 variable "mssqldatabase_name" {
   type    = string
-  default = "debasis-project-mssql-db-01"
+  default = ""
 }
