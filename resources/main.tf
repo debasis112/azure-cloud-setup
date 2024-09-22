@@ -26,7 +26,8 @@ resource "azurerm_mssql_server" "sql-server-01" {
 # resource "azurerm_mssql_database" "sql-database-01" {
 #   name         = var.mssqldatabase_name
 #   server_id    = azurerm_mssql_server.sql-server-01.id
-#   collation    = "SQL_Latin1_General_CP1_CI_AS"
+#   // collation    = "SQL_Latin1_General_CP1_CI_AS"
+#    collation = "GP_S_Gen5_1"
 #   // license_type = "LicenseIncluded"
 #   max_size_gb  = 32
 
