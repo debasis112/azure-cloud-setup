@@ -47,3 +47,17 @@ resource "azurerm_resource_group" "rsg-01" {
 # #   end_ip_address   = "192.168.103.19"
 # # }
 
+/////////////////////////////////////////////
+
+# ARC Test
+
+////////////////////////////////////////////
+
+resource "azurerm_container_registry" "acr" {
+  name                     = "myacrregistry"
+  resource_group_name      = azurerm_resource_group.rsg-01.name
+  location                 = azurerm_resource_group.rsg-01.location
+  sku                      = "Basic"
+  admin_enabled            = true  # You can also disable this and use service principals for more security.
+  tags     = local.common_tags
+}
