@@ -117,10 +117,10 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_DS1_v2" # Change as needed
+    vm_size    = "Standard_D2s_v3" # Change as needed
     # Few types are:
-        # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Suitable for small workloads
-        # Standard_D2s_v3 (2 vCPUs, 8 GB RAM)
+        # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Not Suitable for my workloads
+        # Standard_D2s_v3 (2 vCPUs, 8 GB RAM) - Suitable for my workload
         # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
         # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
         # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
@@ -152,8 +152,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
   node_count            = 1
 
   # Custom OS settings
-  os_disk_size_gb      = 100 # Minimum OS disk size
-  max_pods             = 30  # Max pods for Standard_DS1_v2
+  os_disk_size_gb      = 200 # Minimum OS disk size
+  max_pods             = 50  # Max pods for Standard_DS1_v2
 
   # Node labels and taints for workload scheduling
   
