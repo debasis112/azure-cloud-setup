@@ -148,7 +148,7 @@ resource "azurerm_role_assignment" "arc-role-01" {
 resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
   name                  = "internalpool"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.kbcl-01.id
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = "Standard_D2s_v3"
   node_count            = 1
 
   # Custom OS settings
