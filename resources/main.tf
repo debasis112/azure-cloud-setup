@@ -186,7 +186,7 @@ resource "kubernetes_deployment" "deploy-01" {
       spec {
         container {
           name  = "nodejs-container"
-          image = "${azurerm_container_registry.example.login_server}/YourImageName:latest" # Adjust image name
+          image = "${azurerm_container_registry.acr.login_server}/project-work:latest" # Adjust image name
 
           port {
             container_port = 80
