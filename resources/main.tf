@@ -161,59 +161,59 @@ resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
 //////////////////////
 //////////////////////
 
-# resource "kubernetes_deployment" "deploy-01" {
-#   metadata {
-#     name      = "nodejs-web-pages"
-#     namespace = "default"
-#   }
+resource "kubernetes_deployment" "deploy-01" {
+  metadata {
+    name      = "nodejs-web-pages"
+    namespace = "default"
+  }
 
-#   spec {
-#     replicas = 2
+  spec {
+    replicas = 2
 
-#     selector {
-#       match_labels = {
-#         app = "nodejs-app"
-#       }
-#     }
+    selector {
+      match_labels = {
+        app = "nodejs-app"
+      }
+    }
 
-#     template {
-#       metadata {
-#         labels = {
-#           app = "nodejs-app"
-#         }
-#       }
+    template {
+      metadata {
+        labels = {
+          app = "nodejs-app"
+        }
+      }
 
-#       spec {
-#         container {
-#           name  = "nodejs-container"
-#           image = "${azurerm_container_registry.example.login_server}/YourImageName:latest" # Adjust image name
+      spec {
+        container {
+          name  = "nodejs-container"
+          image = "${azurerm_container_registry.acr.login_server}/project-work:latest" # Adjust image name
 
-#           port {
-#             container_port = 80
-#           }
-#         }
-#       }
-#     }
-#   }
-# }
+          port {
+            container_port = 80
+          }
+        }
+      }
+    }
+  }
+}
 
-# resource "kubernetes_service" "example" {
-#   metadata {
-#     name      = "nodejs-service"
-#     namespace = "default"
-#   }
+resource "kubernetes_service" "kub-ser-01" {
+  metadata {
+    name      = "nodejs-service"
+    namespace = "default"
+  }
 
-#   spec {
-#     type = "LoadBalancer"
+  spec {
+    type = "LoadBalancer"
 
-#     port {
-#       port        = 80
-#       target_port = 80
-#     }
+    port {
+      port        = 80
+      target_port = 80
+    }
 
-#     selector = {
-#       app = "nodejs-app"
-#     }
-#   }
-# }
+    selector = {
+      app = "nodejs-app"
+    }
+  }
+}
 
