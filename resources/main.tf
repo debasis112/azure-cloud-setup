@@ -103,13 +103,6 @@ resource "azurerm_user_assigned_identity" "identity-01" {
 #   tags = local.common_tags
 # }
 
-# resource "azurerm_role_assignment" "example" {
-#   principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
-#   role_definition_name             = "AcrPull"
-#   scope                            = azurerm_container_registry.acr.id
-#   skip_service_principal_aad_check = true
-# }
-
 
 
 
@@ -124,16 +117,27 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_DS1_v2"
+    vm_size    = "Standard_DS1_v2" # Change as needed
+    # Few types are:
+        # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Suitable for small workloads
+        # Standard_D2s_v3 (2 vCPUs, 8 GB RAM)
+        # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
+        # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
+        # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
+    node_labels = local.common_tags
   }
 
   identity {
-    type = "SystemAssigned"
+    type = "SystemAssigned, UserAssigned"
+    identity_ids = [
+      azurerm_user_assigned_identity.identity-01.id
+    ]
   }
 
   tags = local.common_tags
 }
 
+// Role definition
 resource "azurerm_role_assignment" "arc-role-01" {
   principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
   role_definition_name             = "AcrPull"
