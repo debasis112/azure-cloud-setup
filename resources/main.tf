@@ -128,10 +128,7 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
   }
 
   identity {
-    type = "SystemAssigned, UserAssigned"
-    identity_ids = [
-      azurerm_user_assigned_identity.identity-01.id
-    ]
+    type = "SystemAssigned"
   }
 
   tags = local.common_tags
