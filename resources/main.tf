@@ -58,6 +58,45 @@ resource "azurerm_resource_group" "rsg-01" {
 #   resource_group_name      = azurerm_resource_group.rsg-01.name
 #   location                 = azurerm_resource_group.rsg-01.location
 #   sku                      = "Basic"
-#   admin_enabled            = true  # You can also disable this and use service principals for more security.
+#   admin_enabled            = false  # Default will be disable and we use service principals for more security.
 #   tags     = local.common_tags
+# }
+
+///////////////////////////////////////
+////   User assigned Identity /////////
+//////////////////////////////////////
+resource "azurerm_user_assigned_identity" "identity-01" {
+  location            = azurerm_resource_group.rsg-01.location
+  name                = "test-01"
+  resource_group_name = azurerm_resource_group.rsg-01.name
+}
+
+///////////////////////////////////////
+/////////// Kubctl Testing      ///////
+//////////////////////////////////////
+
+# resource "azurerm_kubernetes_cluster" "kbcl-01" {
+#   name                = "debKub01"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+
+#   default_node_pool {
+#     name       = "firstCount"
+#     node_count = 1 # Can be increased as 1, 3, 5 based on usage
+#     vm_size   = "Standard_DS1_v2" # Change as needed
+#     # Few types are:
+#         # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Suitable for small workloads
+#         # Standard_D2s_v3 (2 vCPUs, 8 GB RAM)
+#         # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
+#         # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
+#         # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
+#   }
+
+#   identity {
+#     type = "SystemAssigned"
+#   }
+
+#   tags = {
+#     environment = "Terraform"
+#   }
 # }
