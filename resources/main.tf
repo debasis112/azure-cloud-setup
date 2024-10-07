@@ -53,14 +53,14 @@ resource "azurerm_resource_group" "rsg-01" {
 
 # ////////////////////////////////////////////
 
-# resource "azurerm_container_registry" "acr" {
-#   name                     = "debacrregistry"
-#   resource_group_name      = azurerm_resource_group.rsg-01.name
-#   location                 = azurerm_resource_group.rsg-01.location
-#   sku                      = "Basic"
-#   admin_enabled            = false  # Default will be disable and we use service principals for more security.
-#   tags     = local.common_tags
-# }
+resource "azurerm_container_registry" "acr" {
+  name                     = "debacrregistry"
+  resource_group_name      = azurerm_resource_group.rsg-01.name
+  location                 = azurerm_resource_group.rsg-01.location
+  sku                      = "Basic"
+  admin_enabled            = false  # Default will be disable and we use service principals for more security.
+  tags     = local.common_tags
+}
 
 ///////////////////////////////////////
 ////   User assigned Identity /////////
@@ -100,9 +100,7 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
     ]
   }
 
-  tags = {
-    environment = "Terraform"
-  }
+  tags = local.common_tags
 }
 
 # resource "azurerm_role_assignment" "example" {
@@ -111,3 +109,34 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
 #   scope                            = azurerm_container_registry.acr.id
 #   skip_service_principal_aad_check = true
 # }
+
+
+
+
+/////////////////////////////////////////////////////////
+
+resource "azurerm_kubernetes_cluster" "kbcl-01" {
+  name                = "example-aks1"
+  location            = azurerm_resource_group.rsg-01.location
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  dns_prefix          = "exampleaks1"
+
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_DS1_v2"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = local.common_tags
+}
+
+resource "azurerm_role_assignment" "arc-role-01" {
+  principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
+  role_definition_name             = "AcrPull"
+  scope                            = azurerm_container_registry.acr.id
+  skip_service_principal_aad_check = true
+}
