@@ -141,3 +141,86 @@ resource "azurerm_role_assignment" "arc-role-01" {
   scope                            = azurerm_container_registry.acr.id
   skip_service_principal_aad_check = true
 }
+//////////////////////////////////////////////////////////
+
+resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
+  name                  = "internalpool"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.example.id
+  vm_size               = "Standard_DS1_v2"
+  node_count            = 1
+
+  # Custom OS settings
+  os_disk_size_gb      = 100 # Minimum OS disk size
+  max_pods             = 30  # Max pods for Standard_DS1_v2
+
+  # Node labels and taints for workload scheduling
+  
+
+  # Specify max_surge for upgrades
+  upgrade_settings {
+    max_surge = 1  # Allow 1 additional node during upgrades
+  }
+
+  tags = local.common_tags
+}
+
+/////////////////////
+//////////////////////
+//////////////////////
+
+# resource "kubernetes_deployment" "deploy-01" {
+#   metadata {
+#     name      = "nodejs-web-pages"
+#     namespace = "default"
+#   }
+
+#   spec {
+#     replicas = 2
+
+#     selector {
+#       match_labels = {
+#         app = "nodejs-app"
+#       }
+#     }
+
+#     template {
+#       metadata {
+#         labels = {
+#           app = "nodejs-app"
+#         }
+#       }
+
+#       spec {
+#         container {
+#           name  = "nodejs-container"
+#           image = "${azurerm_container_registry.example.login_server}/YourImageName:latest" # Adjust image name
+
+#           port {
+#             container_port = 80
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
+
+# resource "kubernetes_service" "example" {
+#   metadata {
+#     name      = "nodejs-service"
+#     namespace = "default"
+#   }
+
+#   spec {
+#     type = "LoadBalancer"
+
+#     port {
+#       port        = 80
+#       target_port = 80
+#     }
+
+#     selector = {
+#       app = "nodejs-app"
+#     }
+#   }
+# }
+
