@@ -135,12 +135,19 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
 }
 
 // Role definition
+# resource "azurerm_role_assignment" "arc-role-01" {
+#   principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
+#   role_definition_name             = "AcrPull"
+#   scope                            = azurerm_container_registry.acr.id
+#   skip_service_principal_aad_check = true
+# }
+
 resource "azurerm_role_assignment" "arc-role-01" {
-  principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
-  role_definition_name             = "AcrPull"
-  scope                            = azurerm_container_registry.acr.id
-  skip_service_principal_aad_check = true
+  principal_id   = "31e3b8e7-f503-4679-8eb0-27e375c939fe" # e.g., 31e3b8e7-f503-4679-8eb0-27e375c939fe
+  role_definition_name = "AcrPull" # Adjust as needed
+  scope          = "/subscriptions/9977996c-e876-4c0e-99df-ae2a55e5fc22/resourceGroups/debasis-project-rsg-01/providers/Microsoft.ContainerRegistry/registries/debacrregistry"
 }
+
 
 
 //////////////////////////////////////////////////////////
