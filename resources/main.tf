@@ -75,33 +75,33 @@ resource "azurerm_user_assigned_identity" "identity-01" {
 /////////// Kubctl Testing      ///////
 //////////////////////////////////////
 
-resource "azurerm_kubernetes_cluster" "kbcl-01" {
-  name                = "debKub01"
-  location            = azurerm_resource_group.rsg-01.location
-  resource_group_name = azurerm_resource_group.rsg-01.name
+# resource "azurerm_kubernetes_cluster" "kbcl-01" {
+#   name                = "debKub01"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
 
-  default_node_pool {
-    name       = "firstcount"
-    node_count = 1 # Can be increased as 1, 3, 5 based on usage
-    vm_size   = "Standard_DS1_v2" # Change as needed
-    # Few types are:
-        # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Suitable for small workloads
-        # Standard_D2s_v3 (2 vCPUs, 8 GB RAM)
-        # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
-        # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
-        # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
-    node_labels = local.common_tags
-  }
+#   default_node_pool {
+#     name       = "firstcount"
+#     node_count = 1 # Can be increased as 1, 3, 5 based on usage
+#     vm_size   = "Standard_DS1_v2" # Change as needed
+#     # Few types are:
+#         # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Suitable for small workloads
+#         # Standard_D2s_v3 (2 vCPUs, 8 GB RAM)
+#         # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
+#         # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
+#         # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
+#     node_labels = local.common_tags
+#   }
 
-  identity {
-    type = "SystemAssigned, UserAssigned"
-    identity_ids = [
-      azurerm_user_assigned_identity.identity-01.id
-    ]
-  }
+#   identity {
+#     type = "SystemAssigned, UserAssigned"
+#     identity_ids = [
+#       azurerm_user_assigned_identity.identity-01.id
+#     ]
+#   }
 
-  tags = local.common_tags
-}
+#   tags = local.common_tags
+# }
 
 # resource "azurerm_role_assignment" "example" {
 #   principal_id                     = azurerm_kubernetes_cluster.kbcl-01.kubelet_identity[0].object_id
