@@ -141,11 +141,13 @@ resource "azurerm_role_assignment" "arc-role-01" {
   scope                            = azurerm_container_registry.acr.id
   skip_service_principal_aad_check = true
 }
+
+
 //////////////////////////////////////////////////////////
 
 resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
   name                  = "internalpool"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.example.id
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.kbcl-01.id
   vm_size               = "Standard_DS1_v2"
   node_count            = 1
 
