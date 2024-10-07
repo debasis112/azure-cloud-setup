@@ -53,23 +53,23 @@ resource "azurerm_resource_group" "rsg-01" {
 
 # ////////////////////////////////////////////
 
-resource "azurerm_container_registry" "acr" {
-  name                     = "debacrregistry"
-  resource_group_name      = azurerm_resource_group.rsg-01.name
-  location                 = azurerm_resource_group.rsg-01.location
-  sku                      = "Basic"
-  admin_enabled            = false  # Default will be disable and we use service principals for more security.
-  tags     = local.common_tags
-}
+# resource "azurerm_container_registry" "acr" {
+#   name                     = "debacrregistry"
+#   resource_group_name      = azurerm_resource_group.rsg-01.name
+#   location                 = azurerm_resource_group.rsg-01.location
+#   sku                      = "Basic"
+#   admin_enabled            = false  # Default will be disable and we use service principals for more security.
+#   tags     = local.common_tags
+# }
 
 ///////////////////////////////////////
 ////   User assigned Identity /////////
 //////////////////////////////////////
-resource "azurerm_user_assigned_identity" "identity-01" {
-  location            = azurerm_resource_group.rsg-01.location
-  name                = "test-01"
-  resource_group_name = azurerm_resource_group.rsg-01.name
-}
+# resource "azurerm_user_assigned_identity" "identity-01" {
+#   location            = azurerm_resource_group.rsg-01.location
+#   name                = "test-01"
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+# }
 
 ///////////////////////////////////////
 /////////// Kubctl Testing      ///////
@@ -108,112 +108,112 @@ resource "azurerm_user_assigned_identity" "identity-01" {
 
 /////////////////////////////////////////////////////////
 
-resource "azurerm_kubernetes_cluster" "kbcl-01" {
-  name                = "example-aks1"
-  location            = azurerm_resource_group.rsg-01.location
-  resource_group_name = azurerm_resource_group.rsg-01.name
-  dns_prefix          = "exampleaks1"
+# resource "azurerm_kubernetes_cluster" "kbcl-01" {
+#   name                = "example-aks1"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   dns_prefix          = "exampleaks1"
 
-  default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_D2s_v3" # Change as needed
-    # Few types are:
-        # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Not Suitable for my workloads
-        # Standard_D2s_v3 (2 vCPUs, 8 GB RAM) - Suitable for my workload
-        # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
-        # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
-        # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
-    node_labels = local.common_tags
-  }
+#   default_node_pool {
+#     name       = "default"
+#     node_count = 1
+#     vm_size    = "Standard_D2s_v3" # Change as needed
+#     # Few types are:
+#         # Standard_DS1_v2 (1 vCPU, 3.5 GB RAM) – Not Suitable for my workloads
+#         # Standard_D2s_v3 (2 vCPUs, 8 GB RAM) - Suitable for my workload
+#         # Standard_D4s_v3 (4 vCPUs, 16 GB RAM)
+#         # Standard_E4s_v3 (4 vCPUs, 32 GB RAM) – Memory-optimized
+#         # Standard_F4s_v2 (4 vCPUs, 8 GB RAM) – Compute-optimized
+#     node_labels = local.common_tags
+#   }
 
-  identity {
-    type = "SystemAssigned"
-  }
+#   identity {
+#     type = "SystemAssigned"
+#   }
 
-  tags = local.common_tags
-}
+#   tags = local.common_tags
+# }
 
-//////////////////////////////////////////////////////////
+# //////////////////////////////////////////////////////////
 
-resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
-  name                  = "internalpool"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.kbcl-01.id
-  vm_size               = "Standard_D2s_v3"
-  node_count            = 1
+# resource "azurerm_kubernetes_cluster_node_pool" "kub-node-pool-01" {
+#   name                  = "internalpool"
+#   kubernetes_cluster_id = azurerm_kubernetes_cluster.kbcl-01.id
+#   vm_size               = "Standard_D2s_v3"
+#   node_count            = 1
 
-  # Custom OS settings
-  os_disk_size_gb      = 200 # Minimum OS disk size
-  max_pods             = 50  # Max pods for Standard_DS1_v2
+#   # Custom OS settings
+#   os_disk_size_gb      = 200 # Minimum OS disk size
+#   max_pods             = 50  # Max pods for Standard_DS1_v2
 
-  # Node labels and taints for workload scheduling
+#   # Node labels and taints for workload scheduling
   
 
-  # Specify max_surge for upgrades
-  upgrade_settings {
-    max_surge = 1  # Allow 1 additional node during upgrades
-  }
+#   # Specify max_surge for upgrades
+#   upgrade_settings {
+#     max_surge = 1  # Allow 1 additional node during upgrades
+#   }
 
-  tags = local.common_tags
-}
+#   tags = local.common_tags
+# }
 
-/////////////////////
-//////////////////////
-//////////////////////
+# /////////////////////
+# //////////////////////
+# //////////////////////
 
-resource "kubernetes_deployment" "deploy-01" {
-  metadata {
-    name      = "nodejs-web-pages"
-    namespace = "default"
-  }
+# resource "kubernetes_deployment" "deploy-01" {
+#   metadata {
+#     name      = "nodejs-web-pages"
+#     namespace = "default"
+#   }
 
-  spec {
-    replicas = 2
+#   spec {
+#     replicas = 2
 
-    selector {
-      match_labels = {
-        app = "nodejs-app"
-      }
-    }
+#     selector {
+#       match_labels = {
+#         app = "nodejs-app"
+#       }
+#     }
 
-    template {
-      metadata {
-        labels = {
-          app = "nodejs-app"
-        }
-      }
+#     template {
+#       metadata {
+#         labels = {
+#           app = "nodejs-app"
+#         }
+#       }
 
-      spec {
-        container {
-          name  = "nodejs-container"
-          image = "${azurerm_container_registry.acr.login_server}/project-work:latest" # Adjust image name
+#       spec {
+#         container {
+#           name  = "nodejs-container"
+#           image = "${azurerm_container_registry.acr.login_server}/project-work:latest" # Adjust image name
 
-          port {
-            container_port = 80
-          }
-        }
-      }
-    }
-  }
-}
+#           port {
+#             container_port = 80
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_service" "kub-ser-01" {
-  metadata {
-    name      = "nodejs-service"
-    namespace = "default"
-  }
+# resource "kubernetes_service" "kub-ser-01" {
+#   metadata {
+#     name      = "nodejs-service"
+#     namespace = "default"
+#   }
 
-  spec {
-    type = "LoadBalancer"
+#   spec {
+#     type = "LoadBalancer"
 
-    port {
-      port        = 80
-      target_port = 80
-    }
+#     port {
+#       port        = 80
+#       target_port = 80
+#     }
 
-    selector = {
-      app = "nodejs-app"
-    }
-  }
-}
+#     selector = {
+#       app = "nodejs-app"
+#     }
+#   }
+# }
 
