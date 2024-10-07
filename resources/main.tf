@@ -81,7 +81,7 @@ resource "azurerm_kubernetes_cluster" "kbcl-01" {
   resource_group_name = azurerm_resource_group.rsg-01.name
 
   default_node_pool {
-    name       = "firstCount"
+    name       = "firstcount"
     node_count = 1 # Can be increased as 1, 3, 5 based on usage
     vm_size   = "Standard_DS1_v2" # Change as needed
     # Few types are:
