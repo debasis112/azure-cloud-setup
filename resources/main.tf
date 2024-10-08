@@ -110,7 +110,7 @@ resource "azurerm_app_service" "app-service-01" {
   name                = "deb-app-service-01"
   location            = azurerm_resource_group.rsg-01.location
   resource_group_name = azurerm_resource_group.rsg-01.name
-  app_service_plan_id = azurerm_app_service_plan.asp-01.id
+  app_service_plan_id = azurerm_service_plan.asp-01.id
 
   # App settings and container configuration
   site_config {
