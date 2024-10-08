@@ -145,8 +145,8 @@ resource "azurerm_linux_web_app" "app-service-01" {
   }
 
   app_settings = {
-    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "DOCKER_REGISTRY_SERVER_URL"          = "https://debacrregistry.azurecr.io"
+    "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
+    "docker_registry_url"          = "https://debacrregistry.azurecr.io"
   }
   identity {
     type = "SystemAssigned"
