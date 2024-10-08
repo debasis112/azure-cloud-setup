@@ -38,14 +38,22 @@ resource "azurerm_mssql_database" "sql-database-01" {
   }
 }
 
+# resource "azurerm_sql_firewall_rule" "example" {
+#   name                = "AllowAppService"
+#   resource_group_name = azurerm_resource_group.main.name
+#   server_name         = azurerm_sql_server.example.name
+#   start_ip_address    = "0.0.0.0"  # Consider more restrictive IP ranges
+#   end_ip_address      = "255.255.255.255"
+# }
+
 // MS SQL DATABASE Firewall
 // Database firewall rule-01
-# resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
-#   name             = "personal-asset-01"
-#   server_id        = azurerm_mssql_server.sql-server-01.id
-#   start_ip_address = "192.168.103.19"
-#   end_ip_address   = "192.168.103.19"
-# }
+resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
+  name             = "AllowAppService"
+  server_id        = azurerm_mssql_server.sql-server-01.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "255.255.255.255"
+}
 
 # /////////////////////////////////////////////
 
