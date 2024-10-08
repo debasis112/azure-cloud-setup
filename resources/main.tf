@@ -70,6 +70,51 @@ resource "azurerm_container_registry" "acr" {
   tags     = local.common_tags
 }
 
+////////////////
+
+# Define the App Service Plan
+resource "azurerm_app_service_plan" "asp-01" {
+  name                = "ASP-debasis-project-01"
+  location            = azurerm_resource_group.rsg-01.location
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  kind                = "Linux"
+
+  sku {
+    tier = "Free"
+    size = "F1"
+  }
+}
+
+# Define the App Service with Docker container
+resource "azurerm_app_service" "example" {
+  name                = "deb-web-test-01"
+  location            = azurerm_resource_group.rsg-01.location
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  app_service_plan_id = azurerm_app_service_plan.asp-01.id
+
+  # App settings and container configuration
+  site_config {
+    linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
+  }
+
+  app_settings = {
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+    "DOCKER_REGISTRY_SERVER_URL"          = "https://debacrregistry.azurecr.io"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  https_only = true
+
+  tags = local.common_tags
+}
+
+# Optional: Define additional properties such as custom domain or TLS
+# SSL and other host-specific settings can also be applied as required but sku of ASP plan will change it will charged.
+
+
 ///////////////////////////////////////
 ////   User assigned Identity /////////
 //////////////////////////////////////
