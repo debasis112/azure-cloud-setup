@@ -24,11 +24,11 @@ resource "azurerm_mssql_server" "sql-server-01" {
 
 # MS SQL DATABASE
 resource "azurerm_mssql_database" "sql-database-01" {
-  name         = var.mssqldatabase_name
-  server_id    = azurerm_mssql_server.sql-server-01.id
-  collation    = "SQL_Latin1_General_CP1_CI_AS"
+  name      = var.mssqldatabase_name
+  server_id = azurerm_mssql_server.sql-server-01.id
+  collation = "SQL_Latin1_General_CP1_CI_AS"
   // license_type = "LicenseIncluded"
-  max_size_gb  = 20
+  max_size_gb = 20
 
   tags = local.common_tags
 
@@ -62,12 +62,12 @@ resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
 # ////////////////////////////////////////////
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "debacrregistry"
-  resource_group_name      = azurerm_resource_group.rsg-01.name
-  location                 = azurerm_resource_group.rsg-01.location
-  sku                      = "Basic"
-  admin_enabled            = true  # Default will be disable and we use service principals for more security.
-  tags     = local.common_tags
+  name                = "debacrregistry"
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  location            = azurerm_resource_group.rsg-01.location
+  sku                 = "Basic"
+  admin_enabled       = true # Default will be disable and we use service principals for more security.
+  tags                = local.common_tags
 }
 
 ////////////////
@@ -102,7 +102,7 @@ resource "azurerm_service_plan" "asp-01" {
   location            = azurerm_resource_group.rsg-01.location
   os_type             = "Linux"
   sku_name            = "F1" # For free use F1, For Basic use B1, For High use P1v2
-  tags     = local.common_tags
+  tags                = local.common_tags
 }
 
 
@@ -142,11 +142,12 @@ resource "azurerm_linux_web_app" "app-service-01" {
   #App settings and container configuration
   site_config {
     # linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
+    always_on = false
   }
 
   app_settings = {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
-    "docker_registry_url"          = "https://debacrregistry.azurecr.io"
+    "docker_registry_url"             = "https://debacrregistry.azurecr.io"
   }
   identity {
     type = "SystemAssigned"
@@ -249,7 +250,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
 #   max_pods             = 50  # Max pods for Standard_DS1_v2
 
 #   # Node labels and taints for workload scheduling
-  
+
 
 #   # Specify max_surge for upgrades
 #   upgrade_settings {
