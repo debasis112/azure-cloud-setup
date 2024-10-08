@@ -141,7 +141,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
   #App settings and container configuration
   site_config {
-    linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
+    # linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
   }
 
   app_settings = {
