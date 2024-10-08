@@ -134,7 +134,7 @@ resource "azurerm_service_plan" "asp-01" {
 
 # Define the App Service with Docker container
 resource "azurerm_linux_web_app" "app-service-01" {
-  name                = "example"
+  name                = "deb-app-service-01"
   resource_group_name = azurerm_resource_group.rsg-01.name
   location            = azurerm_service_plan.asp-01.location
   service_plan_id     = azurerm_service_plan.asp-01.id
