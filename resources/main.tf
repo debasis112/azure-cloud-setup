@@ -73,21 +73,41 @@ resource "azurerm_container_registry" "acr" {
 ////////////////
 
 # Define the App Service Plan
-resource "azurerm_app_service_plan" "asp-01" {
-  name                = "ASP-debasis-project-01"
-  location            = azurerm_resource_group.rsg-01.location
-  resource_group_name = azurerm_resource_group.rsg-01.name
-  kind                = "Linux"
+# resource "azurerm_app_service_plan" "asp-01" {
+#   name                = "ASP-debasis-project-01"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   kind                = "Linux"
 
-  sku {
-    tier = "Free"
-    size = "F1"
-  }
+#   sku {
+#     tier = "Free"
+#     size = "F1"
+#   }
+# }
+
+# resource "azurerm_app_service_plan" "asp-01" {
+#   name                = "ASP-deb-project-01"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+
+#   sku {
+#     tier = "Free"
+#     size = "F1"
+#   }
+# }
+
+resource "azurerm_service_plan" "asp-01" {
+  name                = "deb-app-plan-01"
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  location            = azurerm_resource_group.rsg-01.location
+  os_type             = "Linux"
+  sku_name            = "F1" # For free use F1, For Basic use B1, For High use P1v2
 }
 
+
 # Define the App Service with Docker container
-resource "azurerm_app_service" "example" {
-  name                = "deb-web-test-01"
+resource "azurerm_app_service" "app-service-01" {
+  name                = "deb-app-service-01"
   location            = azurerm_resource_group.rsg-01.location
   resource_group_name = azurerm_resource_group.rsg-01.name
   app_service_plan_id = azurerm_app_service_plan.asp-01.id
