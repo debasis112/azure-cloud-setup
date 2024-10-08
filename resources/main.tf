@@ -106,14 +106,40 @@ resource "azurerm_service_plan" "asp-01" {
 }
 
 
-# Define the App Service with Docker container
-resource "azurerm_app_service" "app-service-01" {
-  name                = "deb-app-service-01"
-  location            = azurerm_resource_group.rsg-01.location
-  resource_group_name = azurerm_resource_group.rsg-01.name
-  app_service_plan_id = azurerm_service_plan.asp-01.id
+# # Define the App Service with Docker container
+# resource "azurerm_app_service" "app-service-01" {
+#   name                = "deb-app-service-01"
+#   location            = azurerm_resource_group.rsg-01.location
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   app_service_plan_id = azurerm_service_plan.asp-01.id
 
-  # App settings and container configuration
+#   # App settings and container configuration
+#   site_config {
+#     linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
+#   }
+
+#   app_settings = {
+#     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+#     "DOCKER_REGISTRY_SERVER_URL"          = "https://debacrregistry.azurecr.io"
+#   }
+
+#   identity {
+#     type = "SystemAssigned"
+#   }
+
+#   https_only = true
+
+#   tags = local.common_tags
+# }
+
+# Define the App Service with Docker container
+resource "azurerm_linux_web_app" "app-service-01" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  location            = azurerm_service_plan.asp-01.location
+  service_plan_id     = azurerm_service_plan.asp-01.id
+
+  #App settings and container configuration
   site_config {
     linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0" # Container Image
   }
@@ -122,7 +148,6 @@ resource "azurerm_app_service" "app-service-01" {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "DOCKER_REGISTRY_SERVER_URL"          = "https://debacrregistry.azurecr.io"
   }
-
   identity {
     type = "SystemAssigned"
   }
@@ -130,6 +155,9 @@ resource "azurerm_app_service" "app-service-01" {
   https_only = true
 
   tags = local.common_tags
+
+
+
 }
 
 # Optional: Define additional properties such as custom domain or TLS
