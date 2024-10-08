@@ -58,7 +58,7 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name      = azurerm_resource_group.rsg-01.name
   location                 = azurerm_resource_group.rsg-01.location
   sku                      = "Basic"
-  admin_enabled            = false  # Default will be disable and we use service principals for more security.
+  admin_enabled            = true  # Default will be disable and we use service principals for more security.
   tags     = local.common_tags
 }
 
