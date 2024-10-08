@@ -38,14 +38,14 @@ resource "azurerm_mssql_database" "sql-database-01" {
   }
 }
 
-# // MS SQL DATABASE Firewall
-# // Database firewall rule-01
-# # resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
-# #   name             = "personal-asset-01"
-# #   server_id        = azurerm_mssql_server.sql-server-01.id
-# #   start_ip_address = "192.168.103.19"
-# #   end_ip_address   = "192.168.103.19"
-# # }
+// MS SQL DATABASE Firewall
+// Database firewall rule-01
+# resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
+#   name             = "personal-asset-01"
+#   server_id        = azurerm_mssql_server.sql-server-01.id
+#   start_ip_address = "192.168.103.19"
+#   end_ip_address   = "192.168.103.19"
+# }
 
 # /////////////////////////////////////////////
 
@@ -53,14 +53,14 @@ resource "azurerm_mssql_database" "sql-database-01" {
 
 # ////////////////////////////////////////////
 
-# resource "azurerm_container_registry" "acr" {
-#   name                     = "debacrregistry"
-#   resource_group_name      = azurerm_resource_group.rsg-01.name
-#   location                 = azurerm_resource_group.rsg-01.location
-#   sku                      = "Basic"
-#   admin_enabled            = false  # Default will be disable and we use service principals for more security.
-#   tags     = local.common_tags
-# }
+resource "azurerm_container_registry" "acr" {
+  name                     = "debacrregistry"
+  resource_group_name      = azurerm_resource_group.rsg-01.name
+  location                 = azurerm_resource_group.rsg-01.location
+  sku                      = "Basic"
+  admin_enabled            = false  # Default will be disable and we use service principals for more security.
+  tags     = local.common_tags
+}
 
 ///////////////////////////////////////
 ////   User assigned Identity /////////
