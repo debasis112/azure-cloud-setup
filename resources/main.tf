@@ -75,14 +75,17 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
   site_config {
     always_on = false
-    linux_fx_version = "DOCKER|project-work:v1.0.0"  # Correct way to specify the Docker image
-    container_registry_managed_identity_client_id = var.AZ_ACR_SPN_CLIENT_ID  # Use your SPN Application ID / client ID
-    container_registry_use_managed_identity = false  # Set to false to use SPN credentials
+    # linux_fx_version = "DOCKER|project-work:v1.0.0"  # Correct way to specify the Docker image
+    # container_registry_managed_identity_client_id = var.AZ_ACR_SPN_CLIENT_ID  # Use your SPN Application ID / client ID
+    # container_registry_use_managed_identity = false  # Set to false to use SPN credentials
   }
 
   app_settings = {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
-    # "DOCKER_REGISTRY_SERVER_URL"      = "https://debacrregistry.azurecr.io"
+    "docker_registry_url"      = "https://debacrregistry.azurecr.io"
+    "docker_registry_username" = var.AZ_ACR_SPN_CLIENT_ID
+    "docker_registry_password" = var.AZ_ACR_SPN_CLIENT_SECRET
+    
   }
 
   identity {
