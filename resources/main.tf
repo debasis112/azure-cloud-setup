@@ -93,27 +93,31 @@ resource "azurerm_service_plan" "asp-01" {
 #   tags       = local.common_tags
 # }
 
-# Define the App Service
-resource "azurerm_linux_web_app" "app-service-01" {
-  name                = "deb-webpage" # Change this to your desired app name
-  resource_group_name = azurerm_resource_group.rsg-01.name
-  location            = azurerm_service_plan.asp-01.location
-  service_plan_id     = azurerm_service_plan.asp-01.id
+# # Define the App Service
+# resource "azurerm_linux_web_app" "app-service-01" {
+#   name                = "deb-webpage" # Change this to your desired app name
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   location            = azurerm_service_plan.asp-01.location
+#   service_plan_id     = azurerm_service_plan.asp-01.id
 
-  site_config {
-    linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/project-work:v1.0.0"
-  }
+#   # site_config {
+#   #   linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/project-work:v1.0.0"
+#   # }
 
-  app_settings = {
-    "docker_registry_url"      = "https://${azurerm_container_registry.acr.login_server}"
-    "docker_registry_username" = azurerm_container_registry.acr.admin_username
-    "docker_registry_password" = azurerm_container_registry.acr.admin_password
-  }
+#   site_config {
+#     always_on        = false
+#   }
 
-  identity {
-    type = "SystemAssigned"
-  }
+#   app_settings = {
+#     "docker_registry_url"      = "https://${azurerm_container_registry.acr.login_server}"
+#     "docker_registry_username" = azurerm_container_registry.acr.admin_username
+#     "docker_registry_password" = azurerm_container_registry.acr.admin_password
+#   }
 
-  https_only = true
-  tags       = local.common_tags
-}
+#   identity {
+#     type = "SystemAssigned"
+#   }
+
+#   https_only = true
+#   tags       = local.common_tags
+# }
