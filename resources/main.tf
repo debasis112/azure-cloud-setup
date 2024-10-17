@@ -5,56 +5,56 @@ resource "azurerm_resource_group" "rsg-01" {
   tags     = local.common_tags
 }
 
-# # MS SQL server
-# resource "azurerm_mssql_server" "sql-server-01" {
-#   name                         = var.mssqlserver_name
-#   resource_group_name          = azurerm_resource_group.rsg-01.name
-#   location                     = azurerm_resource_group.rsg-01.location
-#   version                      = "12.0"
-#   administrator_login          = var.mssqlserver_admin_name
-#   administrator_login_password = var.mssqlserver_admin_pass
-#   minimum_tls_version          = "1.2"
+# MS SQL server
+resource "azurerm_mssql_server" "sql-server-01" {
+  name                         = var.mssqlserver_name
+  resource_group_name          = azurerm_resource_group.rsg-01.name
+  location                     = azurerm_resource_group.rsg-01.location
+  version                      = "12.0"
+  administrator_login          = var.mssqlserver_admin_name
+  administrator_login_password = var.mssqlserver_admin_pass
+  minimum_tls_version          = "1.2"
 
-#   azuread_administrator {
-#     login_username = var.ad_admin_name
-#     object_id      = var.ad_admin_obj_id
-#   }
-#   tags = local.common_tags
-# }
+  azuread_administrator {
+    login_username = var.ad_admin_name
+    object_id      = var.ad_admin_obj_id
+  }
+  tags = local.common_tags
+}
 
-# # MS SQL DATABASE
-# resource "azurerm_mssql_database" "sql-database-01" {
-#   name        = var.mssqldatabase_name
-#   server_id   = azurerm_mssql_server.sql-server-01.id
-#   collation   = "SQL_Latin1_General_CP1_CI_AS"
-#   max_size_gb = 20
+# MS SQL DATABASE
+resource "azurerm_mssql_database" "sql-database-01" {
+  name        = var.mssqldatabase_name
+  server_id   = azurerm_mssql_server.sql-server-01.id
+  collation   = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb = 20
 
-#   tags = local.common_tags
+  tags = local.common_tags
 
-#   # prevent the possibility of accidental data loss
-#   lifecycle {
-#     prevent_destroy = true
-#   }
-# }
+  # prevent the possibility of accidental data loss
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
-# # Define MS SQL DATABASE Firewall
-# resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
-#   name             = "AllowAppService"
-#   server_id        = azurerm_mssql_server.sql-server-01.id
-#   start_ip_address = "0.0.0.0"
-#   end_ip_address   = "255.255.255.255"
-# }
+# Define MS SQL DATABASE Firewall
+resource "azurerm_mssql_firewall_rule" "sql-database-fw-01" {
+  name             = "AllowAppService"
+  server_id        = azurerm_mssql_server.sql-server-01.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "255.255.255.255"
+}
 
-# # Define ARC for image store
-# resource "azurerm_container_registry" "acr" {
-#   name                = "debacrregistry"
-#   resource_group_name = azurerm_resource_group.rsg-01.name
-#   location            = azurerm_resource_group.rsg-01.location
-#   sku                 = "Basic"
-#   admin_enabled       = true
-#   # Default will be false and we use service principals for more security it is used by App service.
-#   tags = local.common_tags
-# }
+# Define ARC for image store
+resource "azurerm_container_registry" "acr" {
+  name                = "debacrregistry"
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  location            = azurerm_resource_group.rsg-01.location
+  sku                 = "Basic"
+  admin_enabled       = true
+  # Default will be false and we use service principals for more security it is used by App service.
+  tags = local.common_tags
+}
 
 # # Define the App service - Service Plan
 # resource "azurerm_service_plan" "asp-01" {
