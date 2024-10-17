@@ -66,58 +66,30 @@ resource "azurerm_service_plan" "asp-01" {
   tags                = local.common_tags
 }
 
-# # Define the App Service with Docker container in Linux
-# resource "azurerm_linux_web_app" "app-service-01" {
-#   name                = "deb-webpage" # Change this to your desired app name
-#   resource_group_name = azurerm_resource_group.rsg-01.name
-#   location            = azurerm_service_plan.asp-01.location
-#   service_plan_id     = azurerm_service_plan.asp-01.id
+# App Service Linux
+resource "azurerm_linux_web_app" "app-service-01" {
+  name                = "deb-webpage"
+  location            = azurerm_resource_group.rsg-01.location
+  resource_group_name = azurerm_resource_group.rsg-01.name
+  service_plan_id     = azurerm_service_plan.asp-01.id
 
-#   site_config {
-#     always_on = false
-#   }
+  app_settings = {
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false" # Optional
+  }
 
-#   app_settings = {
-#     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
-#     "docker_registry_url"             = "https://debacrregistry.azurecr.io"
-#     "docker_image"                    = "project-work:v1.0.0"
-#     "docker_registry_username"        = var.AZ_ACR_SPN_CLIENT_ID
-#     "docker_registry_password"        = var.AZ_ACR_SPN_CLIENT_SECRET
-#   }
+  site_config {
+    always_on = false # Optional
+    application_stack {
+      docker_registry_url      = "https://debacrregistry.azurecr.io"
+      docker_registry_username = azurerm_container_registry.acr.admin_username
+      docker_registry_password = azurerm_container_registry.acr.admin_password
+      docker_image_name        = "project-work:v1.0.0" # Specify the image here
+    }
+  }
 
-#   identity {
-#     type = "SystemAssigned"
-#   }
+  identity {
+    type = "SystemAssigned" # Enable managed identity
+  }
 
-#   https_only = true
-#   tags       = local.common_tags
-# }
-
-# # Define the App Service
-# resource "azurerm_linux_web_app" "app-service-01" {
-#   name                = "deb-webpage" # Change this to your desired app name
-#   resource_group_name = azurerm_resource_group.rsg-01.name
-#   location            = azurerm_service_plan.asp-01.location
-#   service_plan_id     = azurerm_service_plan.asp-01.id
-
-#   # site_config {
-#   #   linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/project-work:v1.0.0"
-#   # }
-
-#   site_config {
-#     always_on        = false
-#   }
-
-#   app_settings = {
-#     "docker_registry_url"      = "https://${azurerm_container_registry.acr.login_server}"
-#     "docker_registry_username" = azurerm_container_registry.acr.admin_username
-#     "docker_registry_password" = azurerm_container_registry.acr.admin_password
-#   }
-
-#   identity {
-#     type = "SystemAssigned"
-#   }
-
-#   https_only = true
-#   tags       = local.common_tags
-# }
+  tags = local.common_tags
+}
