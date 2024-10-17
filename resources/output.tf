@@ -21,3 +21,7 @@
 # # output "sql-server-01-fqdn" {
 # #   value = data.azurerm_mssql_server.sql-server-01.fully_qualified_domain_name
 # # }
+
+output "scope_map_id" {
+  value = data.azurerm_container_registry_token.token_acr.scope_map_id
+}
