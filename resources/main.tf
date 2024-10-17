@@ -81,7 +81,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
     "DOCKER_REGISTRY_SERVER_URL"      = "https://debacrregistry.azurecr.io"
     "DOCKER_REGISTRY_SERVER_USERNAME"  = var.AZ_ACR_SPN_CLIENT_ID  # Use your SPN Application ID / client ID
-    "DOCKER_REGISTRY_SERVER_PASSWORD"  = var.AZ_ACR_SPN_CLIENT_SECRET # Use your SPN secret
+    "DOCKER_REGISTRY_SERVER_PASSWORD"  = var.AZ_ACR_SPN_CLIENT_SECRET # Use your SPN secret.
   }
 
   identity {
