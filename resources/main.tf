@@ -80,6 +80,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
   app_settings = {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
     "docker_registry_url"      = "https://debacrregistry.azurecr.io"
+    "docker_image" = "project-work:v1.0.0"
     "docker_registry_username" = var.AZ_ACR_SPN_CLIENT_ID
     "docker_registry_password" = var.AZ_ACR_SPN_CLIENT_SECRET
     
