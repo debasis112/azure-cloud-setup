@@ -75,8 +75,8 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
   site_config {
     always_on = false
+    linux_fx_version = "DOCKER|project-work:v1.0.0"
   }
-
   app_settings = {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
     "docker_registry_url"      = "https://debacrregistry.azurecr.io"
