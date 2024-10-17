@@ -83,7 +83,6 @@ resource "azurerm_service_plan" "asp-01" {
 #     "docker_image" = "project-work:v1.0.0"
 #     "docker_registry_username" = var.AZ_ACR_SPN_CLIENT_ID
 #     "docker_registry_password" = var.AZ_ACR_SPN_CLIENT_SECRET
-    
 #   }
 
 #   identity {
@@ -92,4 +91,32 @@ resource "azurerm_service_plan" "asp-01" {
 
 #   https_only = true
 #   tags       = local.common_tags
+# }
+
+
+# # Define the App Service
+# resource "azurerm_linux_web_app" "app-service-01" {
+#   name                = "deb-webpage"  # Change this to your desired app name
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   location            = azurerm_service_plan.asp-01.location
+#   service_plan_id     = azurerm_service_plan.asp-01.id
+
+#   site_config {
+#     linux_fx_version = "DOCKER|debacrregistry.azurecr.io/project-work:v1.0.0"
+#   }
+
+#   app_settings = {
+#     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
+#     "docker_registry_url"      = "https://debacrregistry.azurecr.io"
+#     "docker_image" = "project-work:v1.0.0"
+#     "docker_registry_username" = var.AZ_ACR_SPN_CLIENT_ID
+#     "docker_registry_password" = var.AZ_ACR_SPN_CLIENT_SECRET
+#   }
+
+#   identity {
+#     type = "SystemAssigned"
+#   }
+
+#   tags       = local.common_tags
+#   https_only = true
 # }

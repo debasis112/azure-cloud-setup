@@ -21,3 +21,14 @@
 # # output "sql-server-01-fqdn" {
 # #   value = data.azurerm_mssql_server.sql-server-01.fully_qualified_domain_name
 # # }
+
+# Retrieve ACR admin credentials using outputs from azurerm_container_registry
+output "acr_admin_username" {
+  value = azurerm_container_registry.acr.admin_username
+  sensitive = false
+}
+
+output "acr_admin_password" {
+  value = azurerm_container_registry.acr.admin_password
+  sensitive = true
+}
