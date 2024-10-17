@@ -24,11 +24,11 @@
 
 # Retrieve ACR admin credentials using outputs from azurerm_container_registry
 output "acr_admin_username" {
-  value = azurerm_container_registry.acr.admin_username
+  value     = azurerm_container_registry.acr.admin_username
   sensitive = false
 }
 
 output "acr_admin_password" {
-  value = azurerm_container_registry.acr.admin_password
+  value     = azurerm_container_registry.acr.admin_password
   sensitive = true
 }

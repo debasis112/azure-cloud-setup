@@ -24,8 +24,8 @@ variable "AZ_ACR_SPN_CLIENT_ID" {
 }
 
 variable "AZ_ACR_SPN_CLIENT_SECRET" {
-  type    = string
-  default = ""
+  type      = string
+  default   = ""
   sensitive = true
 }
 
