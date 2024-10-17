@@ -66,23 +66,23 @@ resource "azurerm_service_plan" "asp-01" {
   tags                = local.common_tags
 }
 
-# Define the App Service with Docker container in linux
-resource "azurerm_linux_web_app" "app-service-01" {
-  name                = "deb-app-service-01"
-  resource_group_name = azurerm_resource_group.rsg-01.name
-  location            = azurerm_service_plan.asp-01.location
-  service_plan_id     = azurerm_service_plan.asp-01.id
+# # Define the App Service with Docker container in linux
+# resource "azurerm_linux_web_app" "app-service-01" {
+#   name                = "deb-app-service-01"
+#   resource_group_name = azurerm_resource_group.rsg-01.name
+#   location            = azurerm_service_plan.asp-01.location
+#   service_plan_id     = azurerm_service_plan.asp-01.id
 
-  site_config {
-    always_on = false
-  }
-  app_settings = {
-    "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
-    "docker_registry_url"             = "https://debacrregistry.azurecr.io"
-  }
-  identity {
-    type = "SystemAssigned"
-  }
-  https_only = true
-  tags       = local.common_tags
-}
+#   site_config {
+#     always_on = false
+#   }
+#   app_settings = {
+#     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
+#     "docker_registry_url"             = "https://debacrregistry.azurecr.io"
+#   }
+#   identity {
+#     type = "SystemAssigned"
+#   }
+#   https_only = true
+#   tags       = local.common_tags
+# }
