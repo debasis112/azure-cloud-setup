@@ -12,7 +12,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
   app_settings = {
     # Correctly setting the ACR connection details
-    "docker_registry_url"      = "DOCKER|${azurerm_container_registry.acr.login_server}"
+    "docker_registry_url"      = "DOCKER|https://${azurerm_container_registry.acr.login_server}"
     "docker_image"             = "project-work:v1.0.0"
     "docker_registry_username" = azurerm_container_registry.acr.admin_username
     "docker_registry_password" = azurerm_container_registry.acr.admin_password
