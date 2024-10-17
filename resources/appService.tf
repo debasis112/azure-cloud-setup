@@ -9,7 +9,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
   }
 
   site_config {
-    always_on = true # Optional
+    always_on = false # Optional
     application_stack {
       docker_registry_url      = "https://debacrregistry.azurecr.io"
       docker_registry_username = azurerm_container_registry.acr.admin_username
