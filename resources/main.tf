@@ -68,7 +68,7 @@ resource "azurerm_service_plan" "asp-01" {
 
 # Define the App Service with Docker container in Linux
 resource "azurerm_linux_web_app" "app-service-01" {
-  name                = "deb-webpage"  # Change this to your desired app name
+  name                = "deb-webpage" # Change this to your desired app name
   resource_group_name = azurerm_resource_group.rsg-01.name
   location            = azurerm_service_plan.asp-01.location
   service_plan_id     = azurerm_service_plan.asp-01.id
@@ -79,10 +79,10 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
   app_settings = {
     "WEBSITES_ENABLE_SERVICE_STORAGE" = "false"
-    "docker_registry_url"      = "https://debacrregistry.azurecr.io"
-    "docker_image" = "project-work:v1.0.0"
-    "docker_registry_username" = var.AZ_ACR_SPN_CLIENT_ID
-    "docker_registry_password" = var.AZ_ACR_SPN_CLIENT_SECRET
+    "docker_registry_url"             = "https://debacrregistry.azurecr.io"
+    "docker_image"                    = "project-work:v1.0.0"
+    "docker_registry_username"        = var.AZ_ACR_SPN_CLIENT_ID
+    "docker_registry_password"        = var.AZ_ACR_SPN_CLIENT_SECRET
   }
 
   identity {
@@ -95,7 +95,7 @@ resource "azurerm_linux_web_app" "app-service-01" {
 
 # Define the App Service
 resource "azurerm_linux_web_app" "app-service-01" {
-  name                = "deb-webpage"  # Change this to your desired app name
+  name                = "deb-webpage" # Change this to your desired app name
   resource_group_name = azurerm_resource_group.rsg-01.name
   location            = azurerm_service_plan.asp-01.location
   service_plan_id     = azurerm_service_plan.asp-01.id
