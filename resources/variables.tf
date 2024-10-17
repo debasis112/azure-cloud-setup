@@ -18,6 +18,21 @@ variable "tenant_id" {
   default = ""
 }
 
+variable "AZ_ACR_SPN_CLIENT_ID" {
+  type    = string
+  default = ""
+}
+
+variable "AZ_ACR_SPN_CLIENT_SECRET" {
+  type    = string
+  default = ""
+}
+
+variable "AZ_ACR_SPN_TENANT_ID" {
+  type    = string
+  default = ""
+}
+
 variable "rg_name" {
   type    = string
   default = ""
