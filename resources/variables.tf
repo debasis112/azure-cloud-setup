@@ -115,6 +115,11 @@ variable "sql_db_fw_end_ip_add" {
 # }
 
 # For ACR setup
+variable "acr_count" {
+  type    = number
+  default = 1
+}
+
 variable "acr_name" {
   type    = string
   default = ""
@@ -130,6 +135,9 @@ variable "acr_admin_enabled" {
   default     = true
   description = "Default will be false, we use service principals it is used by App service."
 }
+
+
+
 
 # For App Service Service plan Setup
 variable "app_service_service_plan_name" {

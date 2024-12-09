@@ -1,4 +1,8 @@
 # For ACR setup
+variable "acr_count" {
+  type    = number
+}
+
 variable "rg_name" {
   type    = string
   default = ""
