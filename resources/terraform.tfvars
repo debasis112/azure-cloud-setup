@@ -21,6 +21,8 @@ sql_db_server_gb_size   = 20
 
 # For SQL server firewall
 sql_db_fw_name = "Allow-all-pass"
+sql_db_fw_start_ip_add = "0.0.0.0"
+sql_db_fw_end_ip_add = "255.255.255.255"
 
 # For Azure Container Registry
 acr_name = "debacrregistry"
