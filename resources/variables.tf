@@ -25,9 +25,21 @@ variable "rg_name" {
   default = ""
 }
 
-variable "location" {
+variable "rg_location" {
   type    = string
   default = ""
+}
+
+variable "tags" {
+  description = "Tags for rsg"
+  type        = map(any)
+  default     = {
+    Environment = "Production"
+    Department  = "cloud-computing"
+    Owner       = "Debasis_Panda"
+    Company     = "WIPRO"
+    STD_ID      = "2020WA86256"
+  }
 }
 
 # For MS SQL server Setup
