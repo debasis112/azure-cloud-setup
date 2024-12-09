@@ -25,7 +25,7 @@ sql_db_fw_start_ip_add = "0.0.0.0"
 sql_db_fw_end_ip_add   = "255.255.255.255"
 
 # For Azure Container Registry
-acr_count = 2
+acr_count = 1
 acr_name  = "debacrregistry"
 acr_sku   = "Basic"
 
