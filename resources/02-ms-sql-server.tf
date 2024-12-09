@@ -14,7 +14,7 @@
 #   }
 #   tags = local.common_tags
 # }
-module "mssql_server" {
+module "sql-server" {
   source                          = "./modules/sql-server"
   sql_server_name                 = var.mssqlserver_name
   sql_server_resg_name            = azurerm_resource_group.rsg-01.name
