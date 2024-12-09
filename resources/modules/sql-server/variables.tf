@@ -34,22 +34,6 @@ variable "sql_server_minimum_tls_ver" {
   type        = string
 }
 
-variable "ad_administrator_login" {
-  description = "The login username for the Azure AD administrator."
-  type        = string
-}
-
-variable "ad_administrator_object_id" {
-  description = "The object ID for the Azure AD administrator."
-  type        = string
-}
-
-variable "tags" {
-  description = "A map of tags to assign to the resource."
-  type        = map(string)
-  default     = {}
-}
-
 variable "ad_admin_name" {
   type    = string
   default = ""
@@ -59,3 +43,9 @@ variable "ad_admin_obj_id" {
   type    = string
   default = ""
 }
+
+variable "tags" {
+  description = "A map of tags to assign to the resource."
+  type        = map(string)
+}
+

@@ -2,6 +2,15 @@
 rg_name     = "debasis-project-rsg-01"
 rg_location = "Central India"
 
+# Basic
+tags = {
+  Environment = "Production"
+  Department  = "cloud-computing"
+  Owner       = "Debasis_Panda"
+  Company     = "WIPRO"
+  STD_ID      = "2020WA86256"
+}
+
 # For MS SQL Server
 mssqlserver_name = "debasis-project-mssqlserver-01"
 

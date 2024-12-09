@@ -19,6 +19,12 @@ variable "tenant_id" {
   default = ""
 }
 
+variable "tags" {
+  description = "Tags for rsg"
+  type        = map(any)
+  default     = {}
+}
+
 # For Resource Group Setup
 variable "rg_name" {
   type    = string
@@ -30,17 +36,7 @@ variable "rg_location" {
   default = ""
 }
 
-variable "tags" {
-  description = "Tags for rsg"
-  type        = map(any)
-  default     = {
-    Environment = "Production"
-    Department  = "cloud-computing"
-    Owner       = "Debasis_Panda"
-    Company     = "WIPRO"
-    STD_ID      = "2020WA86256"
-  }
-}
+
 
 # For MS SQL server Setup
 variable "mssqlserver_name" {
