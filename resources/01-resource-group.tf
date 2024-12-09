@@ -22,11 +22,4 @@ module "resource_group" {
   source   = "./modules/resource-group" # Replace with the path to your module folder
   name     = var.rg_name
   location = var.rg_location
-  tags = {
-    Environment = "Production"
-    Department  = "cloud-computing"
-    Owner       = "Debasis_Panda"
-    Company     = "WIPRO"
-    STD_ID      = "2020WA86256"
-  }
 }
