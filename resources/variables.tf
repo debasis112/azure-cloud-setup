@@ -30,6 +30,11 @@ variable "rg_location" {
   default = ""
 }
 
+variable "vpc_tags" {
+  description = "Tags for rsg"
+  type        = map(any)
+}
+
 # For MS SQL server Setup
 variable "mssqlserver_name" {
   type    = string
