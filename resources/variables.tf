@@ -64,11 +64,38 @@ variable "ad_admin_obj_id" {
   default = ""
 }
 
-variable "mssqldatabase_name" {
+# For sql database
+variable "sql_db_name" {
   type    = string
   default = ""
 }
 
+variable "sql_db_server_collation" {
+  description = "The collation of the MSSQL Server Database."
+  type        = string
+}
+
+variable "sql_db_server_gb_size" {
+  description = "The size of the MSSQL Server Database."
+  type        = number
+  # default     = 20 # Optional default value
+}
+
+# SQl Server Firewall
+variable "sql_db_fw_name" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
+variable "sql_db_fw_start_ip_add" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
+variable "sql_db_fw_end_ip_add" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
 
 # For ACR to pull Image
 # variable "AZ_ACR_SPN_CLIENT_ID" {
@@ -88,6 +115,11 @@ variable "mssqldatabase_name" {
 # }
 
 # For ACR setup
+variable "acr_count" {
+  type    = number
+  default = 1
+}
+
 variable "acr_name" {
   type    = string
   default = ""
@@ -103,6 +135,9 @@ variable "acr_admin_enabled" {
   default     = true
   description = "Default will be false, we use service principals it is used by App service."
 }
+
+
+
 
 # For App Service Service plan Setup
 variable "app_service_service_plan_name" {

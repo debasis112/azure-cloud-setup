@@ -1,9 +1,11 @@
 # # Define ARC for image store
-# resource "azurerm_container_registry" "acr" {
-#   name                = var.acr_name
-#   resource_group_name = azurerm_resource_group.rsg-01.name
-#   location            = azurerm_resource_group.rsg-01.location
-#   sku                 = var.acr_sku
-#   admin_enabled       = var.acr_admin_enabled
-#   tags                = local.common_tags
+# module "acr-01" {
+#   source            = "./modules/acr" # Path to the ACR module
+#   acr_count         = var.acr_count   # Pass the acr_count variable from the root
+#   acr_name          = var.acr_name    # Base name for ACR
+#   rg_name           = var.rg_name
+#   location          = var.rg_location
+#   acr_sku           = var.acr_sku
+#   acr_admin_enabled = var.acr_admin_enabled
+#   tags              = var.tags
 # }
