@@ -30,7 +30,7 @@ variable "rg_location" {
   default = ""
 }
 
-variable "vpc_tags" {
+variable "tags" {
   description = "Tags for rsg"
   type        = map(any)
 }
