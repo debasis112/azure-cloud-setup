@@ -1,7 +1,7 @@
 variable "mssqldatabase_name" {
   description = "The name of the MSSQL Server Database name."
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "sql_db_server_id" {
@@ -17,7 +17,7 @@ variable "sql_db_server_collation" {
 variable "sql_db_server_gb_size" {
   description = "The size of the MSSQL Server Database."
   type        = string
-  default = true
+  default     = true
 }
 
 variable "sql_db_server_delete_prev" {
