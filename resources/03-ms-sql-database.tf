@@ -12,3 +12,12 @@
 #     prevent_destroy = true
 #   }
 # }
+
+module "sql_db-01" {
+  source                  = "./modules/sql-database" # Replace with the path to your module folder
+  sql_db_name             = var.sql_db_name
+  sql_db_server_id        = azurerm_mssql_database.sql-database-01.id
+  sql_db_server_collation = var.sql_db_server_collation
+  sql_db_server_gb_size   = var.sql_db_server_gb_size
+  tags                    = var.tags
+}

@@ -15,7 +15,9 @@ tags = {
 mssqlserver_name = "debasis-project-mssqlserver-01"
 
 # For MS SQL Database
-mssqldatabase_name = "debasis-project-mssql-db-01"
+sql_db_name             = "debasis-project-mssql-db-01"
+sql_db_server_collation = "SQL_Latin1_General_CP1_CI_AS"
+sql_db_server_gb_size   = 20
 
 # For Azure Container Registry
 acr_name = "debacrregistry"

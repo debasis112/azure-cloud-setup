@@ -64,11 +64,27 @@ variable "ad_admin_obj_id" {
   default = ""
 }
 
-variable "mssqldatabase_name" {
+# For sql database
+variable "sql_db_name" {
   type    = string
   default = ""
 }
 
+variable "sql_db_server_id" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
+variable "sql_db_server_collation" {
+  description = "The collation of the MSSQL Server Database."
+  type        = string
+}
+
+variable "sql_db_server_gb_size" {
+  description = "The size of the MSSQL Server Database."
+  type        = number
+  # default     = 20 # Optional default value
+}
 
 # For ACR to pull Image
 # variable "AZ_ACR_SPN_CLIENT_ID" {
