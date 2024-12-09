@@ -14,3 +14,17 @@
 #   }
 #   tags = local.common_tags
 # }
+
+module "mssql_server" {
+  source                       = "./modules/sql_server"
+  name                         = var.mssqlserver_name
+  resource_group_name          = azurerm_resource_group.rsg-01.name
+  location                     = azurerm_resource_group.rsg-01.location
+  version                      = "12.0"
+  administrator_login          = var.mssqlserver_admin_name
+  administrator_login_password = var.mssqlserver_admin_pass
+  minimum_tls_version          = "1.2"
+  ad_administrator_login       = var.ad_admin_name
+  ad_administrator_object_id   = var.ad_admin_obj_id
+  tags                         = local.common_tags
+}
