@@ -70,11 +70,6 @@ variable "sql_db_name" {
   default = ""
 }
 
-variable "sql_db_server_id" {
-  description = "The name of the MSSQL Server."
-  type        = string
-}
-
 variable "sql_db_server_collation" {
   description = "The collation of the MSSQL Server Database."
   type        = string
