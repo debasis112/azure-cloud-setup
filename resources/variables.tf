@@ -25,7 +25,7 @@ variable "rg_name" {
   default = ""
 }
 
-variable "location" {
+variable "rg_location" {
   type    = string
   default = ""
 }

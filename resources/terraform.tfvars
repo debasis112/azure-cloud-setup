@@ -1,6 +1,6 @@
 # For Resource group
-rg_name  = "debasis-project-rsg-01"
-location = "Central India"
+rg_name     = "debasis-project-rsg-01"
+rg_location = "Central India"
 
 # For MS SQL Server
 mssqlserver_name = "debasis-project-mssqlserver-01"
