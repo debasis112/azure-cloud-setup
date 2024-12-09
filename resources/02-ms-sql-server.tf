@@ -1,5 +1,5 @@
 # # Create MS SQL server
-module "sql_server" {
+module "sql_server-01" {
   source = "./modules/sql-server" # Update with the actual path to your module
 
   sql_server_name                 = var.mssqlserver_name
