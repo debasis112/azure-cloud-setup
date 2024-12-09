@@ -81,11 +81,6 @@ variable "sql_db_server_gb_size" {
   # default     = 20 # Optional default value
 }
 
-variable "sql_db_server_id" {
-  description = "The ID of the SQL Server to attach the database."
-  type        = string
-}
-
 # For ACR to pull Image
 # variable "AZ_ACR_SPN_CLIENT_ID" {
 #   type    = string
