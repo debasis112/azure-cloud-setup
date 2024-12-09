@@ -19,6 +19,9 @@ sql_db_name             = "debasis-project-mssql-db-01"
 sql_db_server_collation = "SQL_Latin1_General_CP1_CI_AS"
 sql_db_server_gb_size   = 20
 
+# For SQL server firewall
+sql_db_fw_name = "Allow-all-pass"
+
 # For Azure Container Registry
 acr_name = "debacrregistry"
 acr_sku  = "Basic"

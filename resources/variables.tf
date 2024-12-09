@@ -81,6 +81,22 @@ variable "sql_db_server_gb_size" {
   # default     = 20 # Optional default value
 }
 
+# SQl Server Firewall
+variable "sql_db_fw_name" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
+variable "sql_db_fw_start_ip_add" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
+variable "sql_db_fw_end_ip_add" {
+  description = "The name of the MSSQL Server."
+  type        = string
+}
+
 # For ACR to pull Image
 # variable "AZ_ACR_SPN_CLIENT_ID" {
 #   type    = string
