@@ -10,7 +10,7 @@
 
 resource "azurerm_container_registry" "acr" {
   count               = var.acr_count
-  name                = "${var.acr_name}${count.index}"  # Dynamically change name based on count
+  name                = "${var.acr_name}${count.index+1}"  # Dynamically change name based on count
   resource_group_name = var.rg_name
   location            = var.location
   sku                 = var.acr_sku
