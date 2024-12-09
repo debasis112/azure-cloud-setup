@@ -1,4 +1,4 @@
-# # # Create MS SQL server
+# # Create MS SQL server
 # module "sql_server" {
 #   source = "./modules/sql-server" # Update with the actual path to your module
 
