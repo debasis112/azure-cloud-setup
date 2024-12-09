@@ -6,7 +6,7 @@
 #   end_ip_address   = "255.255.255.255"
 # }
 
-module "sql_db-01" {
+module "sql_db-fw-01" {
   source                 = "./modules/sql-database-fw" # Replace with the path to your module folder
   sql_db_fw_name         = var.sql_db_fw_name
   sql_db_fw_server_id    = module.sql_server-01.sql_server_id
