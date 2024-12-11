@@ -125,6 +125,12 @@ variable "acr_name" {
   default = ""
 }
 
+# variable "acr_name_prifix" {
+#   type    = string
+#   default = "bits"
+# }
+
+
 variable "acr_sku" {
   type    = string
   default = ""
